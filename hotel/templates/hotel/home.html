@@ -1,0 +1,18 @@
+{% extends "hotel/base.html" %}
+ 
+
+{% block title%} {% endblock title%}
+
+
+{% block content %}
+<h1> Welcome to the HomePage </h1>
+
+{% for hotel in hotels %}
+    <a href="{% url 'hotel:hotel_detail' hotel.slug %}">
+    <li> {{ hotel }} </li>
+    </a>
+    
+{% endfor %}
+
+
+{% endblock content %}
