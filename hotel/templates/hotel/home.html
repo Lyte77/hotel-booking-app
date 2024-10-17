@@ -6,6 +6,9 @@
 
 {% block content %}
 <h1> Welcome to the HomePage </h1>
+{% if user.is_authenticated %}
+    <p> Hello {{ user.username }}</p>
+{% endif %}
 
 {% for hotel in hotels %}
     <a href="{% url 'hotel:hotel_detail' hotel.slug %}">

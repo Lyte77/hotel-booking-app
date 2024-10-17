@@ -2,4 +2,8 @@
 
 {{ hotels.name }}
 {{ hotels.description }}
-{{ hotels.room.name }}
+
+
+<a href="{% url 'hotels:book_a_room' hotels.room.slug %}">
+    {{ hotels.room.name }}
+</a>

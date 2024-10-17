@@ -1,6 +1,11 @@
 from django.db import models
 from multiselectfield import MultiSelectField
 from autoslug import AutoSlugField
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from account.models import User
+
+
 
 # Create your models here.
 class Room(models.Model):
@@ -62,3 +67,14 @@ class Hotel(models.Model):
     def __str__(self):
         return self.name
     
+
+class Booking(models.Model):
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    check_in_date = models.DateTimeField()
+    check_out_date = models.DateTimeField()
+    number_of_guests = models.IntegerField()
+
+    def __str__(self):
+        return f"Booking for {self.user.username} for {self.room}"
