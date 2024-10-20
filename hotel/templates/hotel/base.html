@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+
+    <form method=POST action="{% url 'hotels:search_for_room' %}" name="searched">
+        {% csrf_token %}
+        <input type='search' placeholder="Search for a room" name="searched">
+        <button type="submit">Search</button>
+    </form>
+
+
+
     {% block content %}
     {% endblock %}
 </body>

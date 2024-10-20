@@ -1,14 +1,18 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import Room, Hotel, Booking
 from django.db import IntegrityError
+from django.contrib import messages
+from django.db.models import Q 
 from .forms import BookingForm
 
 # Create your views here.
 
 def home_page(request):
     hotels =  Hotel.objects.all()
+   
     rooms =  Room.objects.all()
-    context = {'hotels':hotels}
+    
+    context = { 'hotels': hotels}
     return render(request, 'hotel/home.html', context)
 
 def hotel_detail_page(request,slug):
@@ -53,3 +57,16 @@ def book_a_room(request, slug):
         form = BookingForm()
     context = {'room': room, 'form': form}
     return render(request, 'hotel/booking_form.html', context)
+
+
+def search_for_room(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        searched = Room.objects.filter(name__icontains=searched)
+        return render(request, 'hotel/searched_room.html' ,{'searched':searched})
+        # if not searched:
+        #     messages.success(request, "The Room does not exist")
+        #     return render(request, 'hotel/searched_room.html')
+        # else:
+    else:
+        return render(request, 'hotel/searched_room.html')

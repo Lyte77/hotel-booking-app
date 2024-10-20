@@ -1,0 +1,15 @@
+{% extends "hotel/base.html" %}
+{% load static %}
+
+{% block content %}
+<center>
+    {% if searched %}
+      {% for room in searched %}
+        {{ room }} <br/>
+      {% endfor %}
+    {% else %}
+      <h2> Room does not exist </h2>
+   
+    {% endif %}
+</center>
+{% endblock %}
