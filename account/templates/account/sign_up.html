@@ -1,9 +1,15 @@
-<h1> Sign Up </h1>
-{% load crispy_forms_tags %}
+{% extends "hotel/base.html" %}
 
-<form method="post">
-    {% csrf_token %}
-    {{form | crispy}}
-    <button type="submit">Sign Up </button>
-    <p> Already have an account? Log in <a href="/login">here</a> </p>
-</form>
+{% block content %}
+<div class="container">
+        <h4 class="text-center"> Sign Up </h4>
+        {% load crispy_forms_tags %}
+        
+        <form method="post">
+            {% csrf_token %}
+            {{form | crispy}}
+            <button type="submit"class="btn btn-primary">Sign Up </button>
+            <p> Already have an account? Log in <a href="/login">here</a> </p>
+        </form>
+</div>
+{% endblock %}

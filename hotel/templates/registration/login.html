@@ -1,8 +1,15 @@
-<h1> Log in </h1>
+{% extends "hotel/base.html" %}
+
+{% block content %}
+<div class="container">
+<h1 class="text-center"> Log in </h1>
+{% load crispy_forms_tags %}
 
 <form method="post">
     {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Log in </button>
+    {{form | crispy}}
+    <button type="submit" class="btn btn-primary">Log in </button>
     <p> Don't have an account already? Sign up <a href="{% url 'account:signup' %}">here</a> </p>
 </form>
+</div>
+{% endblock %}

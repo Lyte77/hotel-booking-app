@@ -1,9 +1,221 @@
-<h1> Hotel Detail Page </h1>
+{% extends "hotel/base.html" %}
 
-{{ hotels.name }}
-{{ hotels.description }}
+{% block content %}
+
+<style>
+    .detail-page{
+        background-image: url({{ background_image }});
+        background-size: cover;
+        height:300px;
+        filter: blur(1px);
+        
+        color: black;
+    }
+
+</style>
+<div class="detail-page">
+    <div class="hero-text text-center  text-bold" >
+        <h1 class="">{{ hotels.name }}</h1>
+        
+    </div>
+   
+</div>
+<h1 class="text-primary text-center mt-5"  > {{ hotels.name }} </h1>
+
+<section class="container py-5">
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <img src="{{ hotels.image.url }}" class="img-fluid rounded" alt="">
+        </div>
+        <div class="col-12 col-lg-6 mt-4">
+            <h4 class="text-center">About this hotel</h4>
+            <p>{{ hotels.description }}</p>
+        </div>
+    </div>
+</section>
 
 
-<a href="{% url 'hotels:book_a_room' hotels.room.slug %}">
-    {{ hotels.room.name }}
-</a>
+
+</section>
+<section class="rooms container mt-5">
+    <p class="text-center text-bold "> Our Amenities: </p>
+    <hr>
+    <div class="card-body pt-4 p-0">
+        <div class="row g-4">
+            <!-- Activities -->
+            <div class="col-sm-6">
+                <h6><i class="fa-solid fa-biking me-2"></i>Activities</h6>
+                <!-- List -->
+                 {% for activity in hotels.activities %}
+                <ul class="list-group list-group-borderless mt-2 mb-0">
+                    <li class="list-group-item pb-0">
+                        <i class="fa-solid fa-check-circle text-success me-2"></i>{{ activity }}
+                    </li>
+                   
+                </ul>
+                {% endfor %}
+            </div>
+
+            <!-- Payment Method -->
+            <div class="col-sm-6">
+                <h6><i class="fa-solid fa-credit-card me-2"></i>Payment Method</h6>
+                <!-- List -->
+                 {% for payment in hotels.payment_method %}
+                <ul class="list-group list-group-borderless mt-2 mb-0">
+                    <li class="list-group-item pb-0">
+                        <i class="fa-solid fa-check-circle text-success me-2"></i>{{ payment }}
+                    </li>
+                 
+                </ul>
+                {% endfor %}
+            </div>
+
+            <!-- Services -->
+            <div class="col-sm-6">
+                <h6><i class="fa-solid fa-concierge-bell me-2"></i>Services</h6>
+                <!-- List -->
+                 {% for service in hotels.services %}
+                <ul class="list-group list-group-borderless mt-2 mb-0">
+                    <li class="list-group-item pb-0">
+                        <i class="fa-solid fa-check-circle text-success me-2"></i>{{ service }}
+                    </li>
+                    
+                    
+                </ul>
+                {% endfor %}
+            </div>
+
+          
+
+                <h6><i class="fa-solid fa-volume-up me-2"></i>Staff Language</h6>
+                <!-- List -->
+                 {% for language in hotels.staff_languages %}
+                <ul class="list-group list-group-borderless mt-2 mb-0">
+                    <li class="list-group-item pb-0">
+                        <i class="fa-solid fa-check-circle text-success me-2"></i>{{ language }}
+                    </li>
+                    
+                </ul>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    </a>
+
+</section>
+
+
+
+
+<!-- Featured Room -->
+  <section>
+	<div class="container">
+
+		<!-- Title -->
+		<div class="row mb-4">
+			<div class="col-12 text-center">
+				<h2 class="mb-0">Featured Rooms</h2>
+			</div>
+		</div>
+
+		
+
+
+
+<div class="card-body pt-4 p-0">
+    <div class="vstack gap-4">
+
+        <!-- Room item START -->
+        {% for room in rooms %}
+        <div class="card shadow p-3">
+            <div class="row g-4">
+                <!-- Card img -->
+                <div class="col-md-5 position-relative">
+
+                    <!-- Overlay item -->
+                    <div class="position-absolute top-0 start-0 z-index-1 mt-3 ms-4">
+                        <div class="badge text-bg-danger">30% Off</div>
+                    </div>
+
+                    <!-- Slider START -->
+                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{{ room.room_type.third_room_img.url }}" class="d-block w-100 img-fluid" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{{ room.room_type.third_room_img.url }}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{{ room.room_type.third_room_img.url }}" class="d-block w-100" alt="...">
+                            </div>
+                          </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                    </div>
+                    <!-- Slider END -->
+
+                    <!-- Button -->
+                    
+                </div>
+
+                <!-- Card body -->
+                <div class="col-md-7">
+                    <div class="card-body d-flex flex-column h-100 p-0">
+
+                        <!-- Title -->
+                        <h5 class="card-title"><a href="#">{{ room.name }}</a></h5>
+
+                        <!-- Amenities -->
+                         {% for room_option in room.room_options %}
+                        <ul class="nav nav-divider mb-2">
+                            <li class="nav-item">{{ room_option }}</li>
+                            
+                            
+                        </ul>
+                        {% endfor %}
+
+                        
+                        
+                        <!-- Price and Button -->
+                        <div class="d-sm-flex justify-content-sm-between align-items-center mt-auto">
+                            <!-- Button -->
+                            <div class="d-flex align-items-center">
+                                <h5 class="fw-bold mb-0 me-1">${{ room.price }}</h5>
+                                <span class="mb-0 me-2">/day</span>
+                                <span class="text-decoration-line-through mb-0">$500</span>
+                            </div>
+                            <!-- Price -->
+                            <div class="mt-3 mt-sm-0">
+                                <a href="{% url 'hotels:book_a_room' room.slug %}" class="btn btn-sm btn-primary mb-0">Book Room</a>    
+                            </div>                  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Room item END -->
+    </div>
+</div>
+</section>
+
+
+  
+
+    
+    
+    
+  
+
+{% endblock content %}
+
+

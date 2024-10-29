@@ -1,0 +1,27 @@
+.hero-section{
+   background-image: url(/static/images/hotel-1.jpg) ; 
+   background-size: cover;
+   background-position: center;
+   height: 500px;
+   color:rgb(253, 249, 249);
+   text-align: center;
+   padding: 100px 0;
+   
+}
+
+.hero-text{
+    padding-top: 100px;
+}
+.hero-text h1{
+    font-size: 4em;
+}
+
+
+.detail-page{
+    height: 550%;
+    width: 100%;
+    background-color: red;
+    color: white;
+}
+
+
