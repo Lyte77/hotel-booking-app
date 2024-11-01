@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hotel',
     'account',
+   
 
     'crispy_forms',
     'crispy_bootstrap5',

@@ -3,6 +3,7 @@ from .models import Room, Hotel, Booking
 from django.db import IntegrityError
 from django.contrib import messages
 from django.db.models import Q 
+
 from .forms import BookingForm
 
 # Create your views here.
@@ -57,6 +58,7 @@ def book_a_room(request, slug):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
+            
             if is_room_available(room, form.cleaned_data['check_in_date'], form.cleaned_data['check_out_date']):
                 
                 try:
@@ -65,9 +67,11 @@ def book_a_room(request, slug):
                     booking.room = room
                   
                     booking.save()
-                    print("Booking Successful")
-                    messages.add_message(request, messages.ERROR, "Room booked successfully.")  
+                    messages.add_message(request, messages.SUCCESS, "Room booked sucessfully.")
                     return redirect('hotel:home')
+                   
+                   
+   
                 except IntegrityError:
                     print("Can't book room. Database integrity error.")
                 except Exception as e:

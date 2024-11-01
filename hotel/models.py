@@ -122,12 +122,13 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
-    
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in_date = models.DateTimeField()
     check_out_date = models.DateTimeField()
     number_of_guests = models.IntegerField()
+    booked =  models.BooleanField(default=False)
 
     def __str__(self):
         return f"Booking for {self.user.username} for {self.room}"
